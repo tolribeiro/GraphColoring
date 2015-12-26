@@ -106,6 +106,7 @@ int main()
     // convert now to string form
     char* dt = ctime(&now);
 
+    // header
     cout << "\n\n";
     cout << "\t\t\t\e[1;34m-------------------------------------------------------------------------------------------------\e[0m\n";
     cout << "\t\t\t\e[1;34m-\e[0m\t\t\t\t\033[0;37mUPE\033[0m - \e[0;37mEscola Politécnica de Pernambuco\e[0m\t\t\t\t\e[1;34m-\e[0m\n";
