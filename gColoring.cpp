@@ -96,7 +96,11 @@ int main()
     int V, E = 0, a, b, i, j;
     vector<int> edges;
     
-    tikz_code << "\\documentclass[11pt]{article}\n\\usepackage{tkz-graph}\n\\begin{document}\n\\begin{figure}\n\\centering\n\\huge{\\bf{Grafo Colorido de }{\\tt gColoring.cpp}.}\n\\begin{tikzpicture}[scale=1.2]\n\\renewcommand*{\\VertexLineWidth}{2pt}\n\\GraphInit[vstyle=Welsh]\n\\Vertices[unit=3]{circle}{"; //<< somevar << "1" << ",";
+    tikz_code << 
+                "\\documentclass[11pt]{article}\n"<<
+                "\\usepackage{tkz-graph}\n"<<
+                "\\begin{document}\n"<<
+                "\\begin{figure}\n\\centering\n\\huge{\\bf{Grafo Colorido de }{\\tt gColoring.cpp}.}\n\\begin{tikzpicture}[scale=1.2]\n\\renewcommand*{\\VertexLineWidth}{2pt}\n\\GraphInit[vstyle=Welsh]\n\\Vertices[unit=3]{circle}{"; //<< somevar << "1" << ",";
 
     system("clear");
 
@@ -158,6 +162,8 @@ int main()
             system("pdflatex grafoColorido.tex");
             system("clear");
     }
+
+    system("open grafoColorido.pdf");
 
     return 0;
 }
