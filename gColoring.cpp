@@ -9,15 +9,15 @@
 
 using namespace std;
 
-ofstream output_tikz_code("grafoColorido.tex");
-ostringstream tikz_code;
-string key_value_colors[] = {"red", "green", "blue", "black", "yellow", "white"};
-FILE *fp = fopen("input.txt", "r");
+ofstream output_tikz_code("graphColored.tex"); // name of the file
+ostringstream tikz_code;    // the latex code that will be printed 
+string key_value_colors[] = {"red", "yellow", "blue", "black", "violet", "white"}; // array of colors
+FILE *fp = fopen("input.txt", "r"); // input file (this is the graph itself)
 
-// A class that represents an undirected graph
+// class that represents the graph (undirected)
 class Graph
 {
-    int V;    // No. of vertices
+    int V;              // V is the number of vertices
     list<int> *adj;    // A dynamic array of adjacency lists
     public:
         // Constructor and destructor
@@ -34,7 +34,7 @@ class Graph
 void Graph::addEdge(int v, int w)
 {
     adj[v].push_back(w);
-    adj[w].push_back(v);  // Note: the graph is undirected
+    adj[w].push_back(v);  // the graph is undirected
 }
 
 void printing_result(int result[], int V)
@@ -100,7 +100,12 @@ int main()
                 "\\documentclass[11pt]{article}\n"<<
                 "\\usepackage{tkz-graph}\n"<<
                 "\\begin{document}\n"<<
-                "\\begin{figure}\n\\centering\n\\huge{\\bf{Grafo Colorido de }{\\tt gColoring.cpp}.}\n\\begin{tikzpicture}[scale=1.2]\n\\renewcommand*{\\VertexLineWidth}{2pt}\n\\GraphInit[vstyle=Welsh]\n\\Vertices[unit=3]{circle}{"; //<< somevar << "1" << ",";
+                "\\begin{figure}\n" << 
+                "\\centering\n" << 
+                "\\huge{\\bf{Graph Colored from }{\\tt gColoring.cpp}.}\n" <<
+                "\\begin{tikzpicture}[scale=1.2]\n" << "\\renewcommand*{\\VertexLineWidth}{2pt}\n" << 
+                "\\GraphInit[vstyle=Welsh]\n" << 
+                "\\Vertices[unit=3]{circle}{"; //<< somevar << "1" << ",";
 
     system("clear");
 
@@ -109,19 +114,6 @@ int main()
    
     // convert now to string form
     char* dt = ctime(&now);
-
-    // header
-    cout << "\n\n";
-    cout << "\t\t\t\e[1;34m-------------------------------------------------------------------------------------------------\e[0m\n";
-    cout << "\t\t\t\e[1;34m-\e[0m\t\t\t\t\033[0;37mUPE\033[0m - \e[0;37mEscola Politécnica de Pernambuco\e[0m\t\t\t\t\e[1;34m-\e[0m\n";
-    cout << "\t\t\t\e[1;34m-\e[0m\t\t\t\t\t\t\t\t\t\t\t\t\e[1;34m-\e[0m\n";
-    cout << "\t\t\t\e[1;34m-\e[0m\t\t\t\t   Trabalho de Teoria da Computação\t\t\t\t\e[1;34m-\e[0m\n";
-    cout << "\t\t\t\e[1;34m-\e[0m\t\t\t\t         Coloração de Grafos\t\t\t\t\t\e[1;34m-\e[0m\n";
-    cout << "\t\t\t\e[1;34m-\e[0m\t\t\t\t\t\t\t\t\t\t\t\t\e[1;34m-\e[0m\n";
-    cout << "\t\t\t\e[1;34m-\e[0m\t\t\t         Autores: Thiago Ribeiro / Edoardo Lopes\t\t\t\e[1;34m-\e[0m\n";
-    cout << "\t\t\t\e[1;34m-\e[0m\t\t\t\t             \e[0;37mJunho de 2015\e[0m\t\t\t\t\t\e[1;34m-\e[0m\n";
-    cout << "\t\t\t\e[1;34m-------------------------------------------------------------------------------------------------\e[0m\n";
-    cout << "\n\t\t\t" << dt;
 
     fscanf(fp, "%d\n", &V); // read number of vertices from file
 
@@ -150,20 +142,23 @@ int main()
 
     g.greedyColoring(); // call to color the graph
     
-    tikz_code << "\\end{tikzpicture}\n\\caption{" << "TikZ-Graph gerado em " << dt << "." << "}\n\\end{figure}\n\\end{document}\n";
+    tikz_code   << "\\end{tikzpicture}\n\\caption{" << "TikZ-Graph generated in " << dt << "." 
+                << "}\n\\end{figure}\n"
+                << "\\vspace{0.5cm}\n\\begin{center}For more details: {\\tt tolribeiro.github.com/repository}\\end{center}." 
+                << "\\end{document}\n";
 
     output_tikz_code << tikz_code.str();
     output_tikz_code.close();
 
-    cout << "\n\t\t\tAperte ENTER para gerar o grafo a partir de \e[1;33minput.txt\e[0m. ";
+    cout << "\nPress ENTER to generate the graph from \e[1;33minput.txt\e[0m. ";
     if (cin.get()) {
-        cout << "\n\t\t\t* Grafo \e[1;33mG("<< V << ", " << E << ")\e[0m lido de \e[1;33minput.txt\e[0m com sucesso!\n\n\t\t\tAperte ENTER para compilar e ver o resultado. ";
+        cout << "\n* Graph \e[1;33mG("<< V << ", " << E << ")\e[0m read from \e[1;33minput.txt\e[0m successfully!\n\nPress ENTER to compile and see the result. ";
             cin.get();
-            system("pdflatex grafoColorido.tex");
+            system("pdflatex graphColored.tex");
             system("clear");
     }
 
-    system("open grafoColorido.pdf");
+    system("open graphColored.pdf");
 
     return 0;
 }
