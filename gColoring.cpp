@@ -11,7 +11,7 @@ using namespace std;
 
 ofstream output_tikz_code("graphColored.tex"); // name of the file
 ostringstream tikz_code;    // the latex code that will be printed 
-string key_value_colors[] = {"red", "yellow", "blue", "black", "violet", "white"}; // array of colors
+string key_value_colors[] = {"red", "yellow", "blue"}; // array of colors (add more colors if needed)
 FILE *fp = fopen("input.txt", "r"); // input file (this is the graph itself)
 
 // class that represents the graph (undirected)
@@ -142,8 +142,8 @@ int main()
 
     g.greedyColoring(); // call to color the graph
     
-    tikz_code   << "\\end{tikzpicture}\n\\caption{" << "TikZ-Graph generated in " << dt << "." 
-                << "}\n\\end{figure}\n"
+    tikz_code   << "\\end{tikzpicture}\n\\caption{" << "TikZ-Graph generated in " << dt << ".}\n" 
+                << "\\end{figure}\n"
                 << "\\vspace{0.5cm}\n\\begin{center}For more details: {\\tt tolribeiro.github.com/repository}\\end{center}." 
                 << "\\end{document}\n";
 
@@ -152,10 +152,11 @@ int main()
 
     cout << "\nPress ENTER to generate the graph from \e[1;33minput.txt\e[0m. ";
     if (cin.get()) {
-        cout << "\n* Graph \e[1;33mG("<< V << ", " << E << ")\e[0m read from \e[1;33minput.txt\e[0m successfully!\n\nPress ENTER to compile and see the result. ";
-            cin.get();
-            system("pdflatex graphColored.tex");
-            system("clear");
+        cout    << "\n* Graph \e[1;33mG("<< V << ", " << E << ")\e[0m read from \e[1;33minput.txt\e[0m successfully!" 
+                << "\n\nPress ENTER to compile and see the result. ";
+        cin.get();
+        system("pdflatex graphColored.tex");
+        system("clear");
     }
 
     system("open graphColored.pdf");
