@@ -56,27 +56,27 @@ void Graph::greedyColoring()
     for (int u = 1; u < V; u++)
         result[u] = -1;  // no color is assigned to u
  
-    // A temporary array to store the available colors. True
-    // value of available_colors[cr] would mean that the color cr is
+    // A temporary array to store the used colors. True
+    // value of used_colors[cr] would mean that the color cr is
     // assigned to one of its adjacent vertices
-    bool available_colors[V];
+    bool used_colors[V];
     for (int cr = 0; cr < V; cr++)
-        available_colors[cr] = false;
+        used_colors[cr] = false;
  
     // Assign colors to remaining V-1 vertices
     for (int u = 1; u < V; u++)
     {
         // Process all adjacent vertices and flag their colors
-        // as unavailable
+        // as unused
         list<int>::iterator i;
         for (i = adj[u].begin(); i != adj[u].end(); ++i)
             if (result[*i] != -1)
-                available_colors[result[*i]] = true;
+                used_colors[result[*i]] = true;
  
-        // Find the first available color
+        // Find the first used color
         int cr;
         for (cr = 0; cr < V; cr++)
-            if (available_colors[cr] == false)
+            if (used_colors[cr] == false)
                 break;
  
         result[u] = cr; // Assign the found color
@@ -84,7 +84,7 @@ void Graph::greedyColoring()
         // Reset the values back to false for the next iteration
         for (i = adj[u].begin(); i != adj[u].end(); ++i)
             if (result[*i] != -1)
-                available_colors[result[*i]] = false;
+                used_colors[result[*i]] = false;
     }
  
     printing_result(result, V);
