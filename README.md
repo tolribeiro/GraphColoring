@@ -22,3 +22,5 @@ The input file should look like this:
 Simply open the Terminal and run `./gColoring` and see the `.pdf` file as the output.
 
 P.S: You need to have LaTeX installed so the `pdflatex` command is recognized by the Terminal (Linux/Mac OS).
+
+For more details: http://toribeiro.com/understanding-graph-coloring-part-II.html
