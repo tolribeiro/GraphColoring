@@ -4,7 +4,7 @@ C++ program that implements greedy algorithm and generates LaTeX (TikZ) code of 
 ## Creating the `input.txt`
 First you should describe the graph in the `input.txt`. The first line is the number `V` of vertices and the following ones should contain the edges `E`. Let's say we have the graph below:
 
-<img src="http://toribeiro.com/static/img/input_graph.png" width="242" height="260" class="img-responsive center-block" />
+<img src="http://toribeiro.com/img/input_graph.png" width="242" height="260" class="img-responsive center-block" />
 
 The input file should look like this:
 
